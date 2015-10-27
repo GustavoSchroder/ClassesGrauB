@@ -1,16 +1,18 @@
 #pragma once
 
-#include "Image.h"
-
+#include<Windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <stdlib.h>
+#include <math.h>
+#include "IsometricView.h"
+#include "TileMap.h"
 class Tile {
 private:
 	int id;
-	Image image;
 public:
 	int getId() {
 		return id;
-	}
-	Image getImage() {
-		return image;
 	}
 };

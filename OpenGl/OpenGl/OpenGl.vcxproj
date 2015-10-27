@@ -135,10 +135,12 @@
     <ClInclude Include="LoaderImage.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="IsometricView.h" />
     <ClInclude Include="TileSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="helloworld.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

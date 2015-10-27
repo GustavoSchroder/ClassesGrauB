@@ -11,13 +11,16 @@
 
 class TileMap {
 private:
-	Tile map[10][10]; 
 	int coluna;
 	int linha;
+	int map[];
 public:
+	TileMap(int c, int l);
+
 	int getTileId(int x, int y) {
 		map[x][y].getId();
 	}
+
 	int getColuna() {
 		return coluna;
 	}
@@ -30,4 +33,11 @@ public:
 	int setLinha() {
 		this->linha = linha;
 	}
+};
+
+TileMap::TileMap(int c, int l) 
+{
+	coluna = c;
+	linha = l;
+	map[c*l];
 };
