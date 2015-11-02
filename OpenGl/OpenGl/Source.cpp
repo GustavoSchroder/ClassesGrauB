@@ -20,12 +20,15 @@ CONST INT SW = 6;
 CONST INT W = 7;
 CONST INT NW = 8;
 
-const int TX = 10;
-const int TY = 10;
+const int TW = 10;
+const int TH = 10;
 
-IsometricView iv = new IsometricView();
+int x = 0;
+int y = 0;
 
-void desenha( int largura, int altura, int &x, int &y) {
+IsometricView iv;
+
+void desenha(int largura, int altura, int &x, int &y) {
 	glBegin(GL_POLYGON);
 	glColor3f(255.0, 255.0, 255.0);
 	glVertex2f(x, y);
@@ -35,15 +38,17 @@ void desenha( int largura, int altura, int &x, int &y) {
 	glEnd();
 }
 
-void display()
-{
-	for (int i = 0; i < TX; i++) {
-		for (int j = 0; j < TY; j++) {
+void desenhaSlideMap(int &x, int &y) {
+	for (int i = 0; i < TW; i++) {
+		for (int j = 0; j < TH; j++) {
 			iv.calcTilePosition(i, j);
 			desenha(i, j, x, y);
-			
 		}
 	}
+}
+
+void display(){
+	desenhaSlideMap(x, y);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glFlush();
 }
