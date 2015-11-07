@@ -10,15 +10,16 @@
 #include "Tile.h"
 
 class TileMap {
+	
 private:
 	int coluna;
 	int linha;
-//	Tile map[];
+	int map[];
 public:
 	TileMap(int c, int l);
 
-	int getTileId(int x, int y) {
-		//map[x][y].getId();
+	int getTileId(int c, int l) {
+		return map[c*l];
 	}
 
 	int getColuna() {
@@ -33,11 +34,13 @@ public:
 	int setLinha() {
 		this->linha = linha;
 	}
+	void setTileId(int l, int c, int tileId) {
+		map[l*c] = tileId;
+	}
 };
 
-TileMap::TileMap(int c, int l) 
-{
+TileMap::TileMap(int c, int l) {
 	coluna = c;
 	linha = l;
-//	map[c*l];
+	map[c*l];
 };

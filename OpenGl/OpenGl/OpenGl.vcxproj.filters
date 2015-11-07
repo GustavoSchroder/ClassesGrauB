@@ -36,11 +36,11 @@
     <ClInclude Include="IsometricView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TileMapView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="helloworld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

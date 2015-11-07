@@ -2,6 +2,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#include <GL/glut.h>
 #include <stdlib.h>
 #include <math.h>
 #include "IsometricView.h"
@@ -10,6 +11,8 @@
 using namespace std; //para dizer que não precisa colocar namespace na frente do objeto criado por ela
 
 unsigned char var;
+
+int controlador = 0;
 
 CONST INT N = 1;
 CONST INT NE = 2;
@@ -48,17 +51,27 @@ void desenhaSlideMap(int &x, int &y) {
 }
 
 void display(){
-	desenhaSlideMap(x, y);
+	
 	glClear(GL_COLOR_BUFFER_BIT);
+	if (controlador == 0) {
+		controlador = 1;
+		glBegin(GL_POLYGON); // ou glBegin(GL_POINTS);
+		printf("Entrou no display");
+		glVertex2f(0.0, 0.0);
+		glVertex2f(0.0, 0.30);
+		glVertex2f(0.40, 0.30);
+		glVertex2f(0.60, 0.15);
+		glVertex2f(0.40, 0.0);
+		glEnd();
+		glutPostRedisplay();
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
 	glFlush();
 }
 
 
 void keyboard(unsigned char key, int x, int y) {
-	if (key == 'q') {
-		exit(0);
-	}
-	var = key;
+	//TODO
 }
 
 void init(void) {
@@ -68,7 +81,7 @@ void init(void) {
 	/*  initialize viewing values  */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0f, 600.0f, 0.0f, 400.0f);
+	glOrtho(0.5, 0.5, 0.5, 00.0, 00.0, 20.0);
 }
 
 /*
@@ -84,7 +97,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(800, 400);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("hello");
+	glutCreateWindow("Trabalho GrauB");
 	init();
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
