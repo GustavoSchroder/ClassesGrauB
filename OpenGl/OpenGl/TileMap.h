@@ -42,5 +42,5 @@ public:
 TileMap::TileMap(int c, int l) {
 	coluna = c;
 	linha = l;
-	map[c*l];
+	map[l*c];
 };
