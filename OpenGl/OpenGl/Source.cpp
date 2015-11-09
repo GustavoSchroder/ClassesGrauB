@@ -8,7 +8,7 @@
 #include "IsometricView.h"
 #include "TileMap.h"
 
-using namespace std; //para dizer que n„o precisa colocar namespace na frente do objeto criado por ela
+using namespace std; //para dizer que n√£o precisa colocar namespace na frente do objeto criado por ela
 
 unsigned char var;
 
@@ -28,24 +28,44 @@ const int TH = 10;
 
 int x = 0;
 int y = 0;
+int larguraTile = 64;
+int alturaTile = 32;
 
 IsometricView iv;
 
-void desenha(int largura, int altura, int &x, int &y) {
+
+void desenha(int x, int y) {
 	glBegin(GL_POLYGON);
 	glColor3f(255.0, 255.0, 255.0);
 	glVertex2f(x, y);
-	glVertex2f(x + largura, y + (largura / 2));
-	glVertex2f(x, y + (largura));
-	glVertex2f((x - largura), y + (largura / 2));
+	glVertex2f(x + larguraTile, y + (larguraTile / 2));
+	glVertex2f(x, y + (larguraTile));
+	glVertex2f((x - larguraTile), y + (larguraTile / 2));
 	glEnd();
+
+}
+
+void desenhalinha(int x, int y) {
+
+	glBegin(GL_LINE);
+	glColor3f(0, 255.0, 0);
+	glVertex2f(x, y);
+	glVertex2f(x + larguraTile, y + (larguraTile / 2));
+	glVertex2f(x, y + (larguraTile));
+	glVertex2f((x - larguraTile), y + (larguraTile / 2));
+	glEnd();
+}
+void calcTilePosition(int col, int lin) {
+	x = (col * larguraTile) + (lin * (larguraTile/2));
+	y = lin * (alturaTile);
 }
 
 void desenhaSlideMap(int &x, int &y) {
 	for (int i = 0; i < TW; i++) {
 		for (int j = 0; j < TH; j++) {
-			iv.calcTilePosition(i, j);
-			desenha(i, j, x, y);
+			calcTilePosition(i, j);
+			desenha(x,y);
+			desenhalinha(x, y);
 		}
 	}
 }
@@ -53,7 +73,10 @@ void desenhaSlideMap(int &x, int &y) {
 void display(){
 	
 	glClear(GL_COLOR_BUFFER_BIT);
-	if (controlador == 0) {
+	desenhaSlideMap(x, y);
+	
+	
+/*	if (controlador == 0) {
 		controlador = 1;
 		glBegin(GL_POLYGON); // ou glBegin(GL_POINTS);
 		printf("Entrou no display");
@@ -66,7 +89,7 @@ void display(){
 		glutPostRedisplay();
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-	glFlush();
+	*/glFlush();
 }
 
 
@@ -76,12 +99,19 @@ void keyboard(unsigned char key, int x, int y) {
 
 void init(void) {
 	/*  select clearing (background) color       */
-	glClearColor(0.00, 0.0, 30.0, 0.0);
+	glClearColor(0.00, 0.0, 3.0, 0.0);
 
-	/*  initialize viewing values  */
+	glViewport(0, 0, 800, 600);
+
+	// Reset the coordinate system before modifying
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.5, 0.5, 0.5, 00.0, 00.0, 20.0);
+
+	// Set the clipping volume
+	gluOrtho2D(0.0f, 800, 0.0, 600);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 /*
