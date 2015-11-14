@@ -62,9 +62,6 @@ public:
 		}
 		}
 	}
-	void mouseMap() {
-		// faz logica
-	}
 
 	void calcTilePosition(int col, int lin) {
 		x = (col * largura) + (lin * (largura / 2));

@@ -13,7 +13,7 @@ using namespace std; //para dizer que não precisa colocar namespace na frente do
 unsigned char var;
 
 int controlador = 0;
-
+/*
 CONST INT N = 1;
 CONST INT NE = 2;
 CONST INT E = 3;
@@ -23,10 +23,10 @@ CONST INT SW = 6;
 CONST INT W = 7;
 CONST INT NW = 8;
 //constantes para rosa dos ventos
+*/
 
-
-const int TX = 4;
-const int TY = 4;
+const int TX = 16;
+const int TY = 16;
 //numero de tiles
 
 int windowW = 1024;
@@ -34,26 +34,19 @@ int windowH = 700;
 
 int x = 0;
 int y = 0;
-int larguraTile = 64;
-int alturaTile = 32;
+int larguraTile = 32;
+int alturaTile = 16;
 
 IsometricView iv;
 
 int  cont = 1;
 void desenha(int x, int y) {
-	/*
-	if (cont == 0)
-	{
-		glColor3f(255, 255,255);
-		cont = 1;
-	}
-	else if (cont == 1)
-	{
+	if (controlador == 0) {
 		glColor3f(0, 0, 0);
-		cont = 0;
 	}
-	*/
-	glColor3f(0, 0, 0);
+	else if (controlador == -1) {
+		glColor3f(0, 0, 125);
+	}
 	glBegin(GL_POLYGON);
 	glVertex2f(x, y);
 	glVertex2f(x + larguraTile, y + (larguraTile / 2));
@@ -87,13 +80,19 @@ void desenhaSlideMap() {
 	for (int i = 0; i < TX; i++) {
 		for (int j = 0; j < TY; j++) {
 			calcTileDiamont(i, j);
-			desenha(x + 550, y + 150);
+			desenha(x + 500, y + 150);
+		}
+		if (controlador == 0) {
+			controlador = -1;
+		}
+		else if (controlador == -1) {
+			controlador = 0;
 		}
 	}
 	for (int i = TX; i > TX; i--) {
 		for (int j = TX; j > TY; j--) {
 			calcTileDiamont(i, j);
-			desenha(x + 150, y + 300);
+			desenha(x + 300, y + 300);
 
 		}
 	}
