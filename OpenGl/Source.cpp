@@ -22,9 +22,12 @@ CONST INT S = 5;
 CONST INT SW = 6;
 CONST INT W = 7;
 CONST INT NW = 8;
+//constantes para rosa dos ventos
 
-const int TW = 12;
-const int TH = 12;
+
+const int TX = 4;
+const int TY = 4;
+//numero de tiles
 
 int windowW = 1024;
 int windowH = 700;
@@ -75,23 +78,22 @@ void calcTilePosition(int col, int lin) {
 }
 
 void calcTileDiamont(int col, int lin) {
-	x = (col - lin) * larguraTile / 2;
-	y = (col + lin) * alturaTile / 2;
-
+	x = (col - lin) * larguraTile;
+	y = (col + lin) * alturaTile;
 }
 void desenhaSlideMap() {
 
 
-	for (int i = 0; i < TW; i++) {
-		for (int j = 0; j < TH; j++) {
+	for (int i = 0; i < TX; i++) {
+		for (int j = 0; j < TY; j++) {
 			calcTileDiamont(i, j);
-			desenha(x + 250, y + 250);
+			desenha(x + 550, y + 150);
 		}
 	}
-	for (int i = TW; i > TW; i--) {
-		for (int j = TH; j > TH; j--) {
+	for (int i = TX; i > TX; i--) {
+		for (int j = TX; j > TY; j--) {
 			calcTileDiamont(i, j);
-			desenha(x + 250, y + 250);
+			desenha(x + 150, y + 300);
 
 		}
 	}
