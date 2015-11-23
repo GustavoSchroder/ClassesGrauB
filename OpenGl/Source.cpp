@@ -80,7 +80,7 @@ void desenhaSlideMap() {
 	for (int i = 0; i < TX; i++) {
 		for (int j = 0; j < TY; j++) {
 			calcTileDiamont(i, j);
-			desenha(x + 500, y + 150);
+			desenha(x + 500, y + 125);
 		}
 		if (controlador == 0) {
 			controlador = -1;
