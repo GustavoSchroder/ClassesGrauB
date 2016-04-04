@@ -7,10 +7,13 @@
 #include <math.h>
 #include "IsometricView.h"
 #include "TileMap.h"
+#include "TileMapView.h"
 
 using namespace std; //para dizer que não precisa colocar namespace na frente do objeto criado por ela
 
 unsigned char var;
+
+TileMapView t = TileMapView(32,16);
 
 int controlador = 0;
 /*
@@ -29,8 +32,8 @@ const int TX = 16;
 const int TY = 16;
 //numero de tiles
 
-int windowW = 1024;
-int windowH = 700;
+int windowW = 1280;
+int windowH = 640;
 
 int x = 0;
 int y = 0;
@@ -64,6 +67,9 @@ void desenha(int x, int y) {
 
 }
 
+void glutMouseFunc(int button, int state, int x, int y) {
+	t.pontoPertenceTile(x, y, alturaTile, larguraTile);
+}
 
 void calcTilePosition(int col, int lin) {
 	x = (col * larguraTile) + (lin * (larguraTile / 2));
@@ -74,9 +80,8 @@ void calcTileDiamont(int col, int lin) {
 	x = (col - lin) * larguraTile;
 	y = (col + lin) * alturaTile;
 }
+
 void desenhaSlideMap() {
-
-
 	for (int i = 0; i < TX; i++) {
 		for (int j = 0; j < TY; j++) {
 			calcTileDiamont(i, j);
@@ -117,13 +122,15 @@ void init(void) {
 	glClearColor(0.1, 0.1, 0.2, 0.0);
 
 	glViewport(0, 0, windowW, windowH);
+	glutMouseFunc(glutMouseFunc);
 
 	// Reset the coordinate system before modifying
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	// Set the clipping volume
-	gluOrtho2D(0.0, windowW, 0.0, windowH);
+	gluOrtho2D(0, windowW, 130, windowH);
+
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
